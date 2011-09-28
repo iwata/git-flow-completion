@@ -99,17 +99,21 @@ __git-flow-release ()
 
 				(start)
 					_arguments \
-						-F'[Fetch from origin before performing finish]'\
+            (-R)-F'[Fetch from origin before performing finish]'\
+            (-F)-R'[Push to remote repository after performing finish]'\
 						':version:__git_flow_version_list'
 				;;
 
 				(finish)
 					_arguments \
-						-F'[Fetch from origin before performing finish]' \
-						-s'[Sign the release tag cryptographically]'\
-						-u'[Use the given GPG-key for the digital signature (implies -s)]'\
-						-m'[Use the given tag message]'\
-						-p'[Push to $ORIGIN after performing finish]'\
+						(-R)-F'[Fetch from origin before performing finish]' \
+            (-F -p)-R'[Push to remote repository after performing finish]'\
+						(-n)-s'[Sign the release tag cryptographically]'\
+						(-R)-u'[Use the given GPG-key for the digital signature (implies -s)]'\
+						(-n)-m'[Use the given tag message]'\
+						(-R)-p'[Push to $ORIGIN after performing finish]'\
+            (-m -s)-n"[don't tag this release]"\
+						-k"[keep branch after performing finish]"\
 						':version:__git_flow_version_list'
 				;;
 
@@ -150,18 +154,22 @@ __git-flow-hotfix ()
 
 				(start)
 					_arguments \
-						-F'[Fetch from origin before performing finish]'\
+						(-R)-F'[Fetch from origin before performing finish]'\
+            (-F)-R'[Push to remote repository after performing finish]'\
 						':hotfix:__git_flow_version_list'\
 						':branch-name:__git_branch_names'
 				;;
 
 				(finish)
 					_arguments \
-						-F'[Fetch from origin before performing finish]' \
-						-s'[Sign the release tag cryptographically]'\
-						-u'[Use the given GPG-key for the digital signature (implies -s)]'\
-						-m'[Use the given tag message]'\
-						-p'[Push to $ORIGIN after performing finish]'\
+						(-R)-F'[Fetch from origin before performing finish]' \
+            (-F -p)-R'[Push to remote repository after performing finish]'\
+						(-n)-s'[Sign the release tag cryptographically]'\
+						(-R)-u'[Use the given GPG-key for the digital signature (implies -s)]'\
+						(-n)-m'[Use the given tag message]'\
+						(-R)-p'[Push to $ORIGIN after performing finish]'\
+            (-m -s)-n"[don't tag this release]"\
+						-k"[keep branch after performing finish]"\
 						':hotfix:__git_flow_hotfix_list'
 				;;
 
@@ -208,14 +216,16 @@ __git-flow-feature ()
 
 				(start)
 					_arguments \
-						-F'[Fetch from origin before performing finish]'\
+            (-R)-F'[Fetch from origin before performing finish]'\
+            (-F)-R'[Push to remote repository after performing finish]'\
 						':feature:__git_flow_feature_list'\
 						':branch-name:__git_branch_names'
 				;;
 
 				(finish)
 					_arguments \
-						-F'[Fetch from origin before performing finish]' \
+            (-R)-F'[Fetch from origin before performing finish]' \
+            (-F)-R'[Push to remote repository after performing finish]'\
 						-r'[Rebase instead of merge]'\
 						':feature:__git_flow_feature_list'
 				;;

@@ -1,7 +1,7 @@
 git-flow-completion
 ===================
 
-Bash and Zsh completion support for [git-flow](http://github.com/nvie/gitflow)
+Bash and Zsh completion support for [git-flow](http://github.com/iwata/gitflow)
 
 The contained completion routines provide support for completing:
 

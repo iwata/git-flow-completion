@@ -227,6 +227,7 @@ __git-flow-feature ()
             (-R)-F'[Fetch from origin before performing finish]' \
             (-F)-R'[Push to remote repository after performing finish]'\
 						-r'[Rebase instead of merge]'\
+						-k"[keep branch after performing finish]"\
 						':feature:__git_flow_feature_list'
 				;;
 

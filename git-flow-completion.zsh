@@ -101,6 +101,7 @@ __git-flow-release ()
 					_arguments \
             '(-R)-F[Fetch from origin before performing finish]'\
             '(-F)-R[Push to remote repository after performing finish]'\
+            ':now:__now_release'\
 						':version:__git_flow_version_list'
 				;;
 
@@ -124,6 +125,12 @@ __git-flow-release ()
 			esac
 		;;
 	esac
+}
+
+__now_release ()
+{
+  local now=$(date '+%Y%m%d-')
+  _wanted now expl 'now' compadd $now
 }
 
 __git-flow-hotfix ()

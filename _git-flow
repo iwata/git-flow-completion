@@ -97,6 +97,7 @@ __git-flow-hotfix ()
           _arguments \
             '(-R)-F[Fetch from origin before performing finish]'\
             '(-F)-R[Push to remote repository after performing finish]'\
+            ':now:__now'\
             ':hotfix:__git_flow_version_list'\
             ':branch-name:__git_branch_names'
           ;;
@@ -121,6 +122,12 @@ __git-flow-hotfix ()
       esac
       ;;
   esac
+}
+
+__now ()
+{
+  local now=$(date '+%Y%m%d-%H%M')
+  _wanted now expl 'now' compadd $now
 }
 
 __git-flow-feature ()

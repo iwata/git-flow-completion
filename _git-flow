@@ -14,7 +14,7 @@
 
 __git-flow-release ()
 {
-  local curcontext="$curcontext" state line
+  local curcontext="$curcontext" state line expl
   typeset -A opt_args
 
   _arguments -C \
@@ -39,23 +39,23 @@ __git-flow-release ()
       case $line[1] in
 
         (start)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            '(-F)-R[Push to remote repository after performing finish]'\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
             ':now:__now_release'\
             ':version:__git_flow_version_list'
           ;;
 
         (finish)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            '(-F -p)-R[Push to remote repository after performing finish]'\
-            '(-n)-s[Sign the release tag cryptographically]'\
-            '(-R -n)-u[Use the given GPG-key for the digital signature (implies -s)]'\
-            '(-n)-m[Use the given tag message]'\
-            '(-R)-p[Push to $ORIGIN after performing finish]'\
-            "(-m -s)-n[don't tag this release]"\
-            "-k[keep branch after performing finish]"\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -p --push -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-n --notag -s --sign)'{-s,--sign}'[Sign the release tag cryptographically]'\
+            '(-R --remote -n --notag --signingkey -u)'{-u,--signingkey}'[Use the given GPG-key for the digital signature (implies -s)]'\
+            '(-n --notag -m --message)'{-m,--message}'[Use the given tag message]'\
+            '(-R --remote -p --push)'{-p,--push}'[Push to $ORIGIN after performing finish]'\
+            "(-m --message -s --sign -n --notag)"{-n,--notag}"[don't tag this release]"\
+            "(-k --keep)"{-k,--keep}"[keep branch after performing finish]"\
             ':version:__git_flow_version_list'
           ;;
 
@@ -76,7 +76,7 @@ __now_release ()
 
 __git-flow-hotfix ()
 {
-  local curcontext="$curcontext" state line
+  local curcontext="$curcontext" state line expl
   typeset -A opt_args
 
   _arguments -C \
@@ -101,24 +101,24 @@ __git-flow-hotfix ()
       case $line[1] in
 
         (start)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            '(-F)-R[Push to remote repository after performing finish]'\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
             ':now:__now_hotfix'\
             ':hotfix:__git_flow_version_list'\
             ':branch-name:__git_branch_names'
           ;;
 
         (finish)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            "(-F -p)-R[Push to remote repository after performing finish]"\
-            '(-n)-s[Sign the release tag cryptographically]'\
-            '(-R -n)-u[Use the given GPG-key for the digital signature (implies -s)]'\
-            '(-n)-m[Use the given tag message]'\
-            '(-R)-p[Push to $ORIGIN after performing finish]'\
-            "(-m -s)-n[don't tag this release]"\
-            "-k[keep branch after performing finish]"\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -p --push)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-n --notag -s --sign)'{-s,--sign}'[Sign the release tag cryptographically]'\
+            '(-R --remote -n --notag -u --signingkey)'{-u,--signingkey}'[Use the given GPG-key for the digital signature (implies -s)]'\
+            '(-n --notag -m --message)'{-m,--message}'[Use the given tag message]'\
+            '(-R --remote -p --push)'{-p,--push}'[Push to $ORIGIN after performing finish]'\
+            '(-m --message -s --sign -n --notag)'{-n,--notag}"[don't tag this release]"\
+            '(-k --keep)'{-k,--keep}"[keep branch after performing finish]"\
             ':hotfix:__git_flow_hotfix_list'
           ;;
 
@@ -139,7 +139,7 @@ __now_hotfix ()
 
 __git-flow-feature ()
 {
-  local curcontext="$curcontext" state line
+  local curcontext="$curcontext" state line expl
   typeset -A opt_args
 
   _arguments -C \
@@ -170,20 +170,19 @@ __git-flow-feature ()
       case $line[1] in
 
         (start)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            '(-F)-R[Push to remote repository after performing finish]'\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
             ':feature:__git_flow_feature_list'\
             ':branch-name:__git_branch_names'
           ;;
 
         (finish)
-          _arguments \
-            '(-R)-F[Fetch from origin before performing finish]'\
-            '(-F)-R[Push to remote repository after performing finish]'\
-            ':feature:__git_flow_feature_list'\
-            '-r[Rebase instead of merge]'\
-            "-k[keep branch after performing finish]"\
+          _arguments -s :\
+            '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
+            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-r --rebase)'{-r,--rebase}'[Rebase instead of merge]'\
+            '(-k --keep)'{-k,--keep}"[keep branch after performing finish]"\
             ':feature:__git_flow_feature_list'
           ;;
 
@@ -204,7 +203,7 @@ __git-flow-feature ()
 
         (rebase)
           _arguments \
-            -i'[Do an interactive rebase]' \
+            '(-i --interactive)'{-i,--interactive}'[Do an interactive rebase]' \
             ':branch:__git_branch_names'
           ;;
 

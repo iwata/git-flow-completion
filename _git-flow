@@ -41,7 +41,8 @@ __git-flow-release ()
         (start)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -R --remote -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             ':now:__now_release'\
             ':version:__git_flow_version_list'
           ;;
@@ -49,7 +50,8 @@ __git-flow-release ()
         (finish)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -p --push -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -p --push -R --remote -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             '(-n --notag -s --sign)'{-s,--sign}'[Sign the release tag cryptographically]'\
             '(-R --remote -n --notag --signingkey -u)'{-u,--signingkey}'[Use the given GPG-key for the digital signature (implies -s)]'\
             '(-n --notag -m --message)'{-m,--message}'[Use the given tag message]'\
@@ -103,7 +105,8 @@ __git-flow-hotfix ()
         (start)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -R --remote -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             ':now:__now_hotfix'\
             ':hotfix:__git_flow_version_list'\
             ':branch-name:__git_branch_names'
@@ -112,7 +115,8 @@ __git-flow-hotfix ()
         (finish)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -p --push)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -p --push -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             '(-n --notag -s --sign)'{-s,--sign}'[Sign the release tag cryptographically]'\
             '(-R --remote -n --notag -u --signingkey)'{-u,--signingkey}'[Use the given GPG-key for the digital signature (implies -s)]'\
             '(-n --notag -m --message)'{-m,--message}'[Use the given tag message]'\
@@ -172,7 +176,8 @@ __git-flow-feature ()
         (start)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -R --remote -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             ':feature:__git_flow_feature_list'\
             ':branch-name:__git_branch_names'
           ;;
@@ -180,7 +185,8 @@ __git-flow-feature ()
         (finish)
           _arguments -s :\
             '(-R --remote -F --fetch)'{-F,--fetch}'[Fetch from origin before performing finish]'\
-            '(-F --fetch -R --remote)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-F --fetch -R --remote -P --pull)'{-R,--remote}'[Push to remote repository after performing finish]'\
+            '(-R --remote -P --pull)'{-P,--pull}'[Pull from $ORIGIN before performing local operation]'\
             '(-r --rebase)'{-r,--rebase}'[Rebase instead of merge]'\
             '(-k --keep)'{-k,--keep}"[keep branch after performing finish]"\
             ':feature:__git_flow_feature_list'
